@@ -97,7 +97,7 @@ If the user picks coder-overseer, structure the plan with a per-coder section + 
 - Spawn integration overseer (runs touchpoint tests)
 - Reconcile findings (max 3 rounds)
 
-**Inside both paths**, all production code goes through `evanflow-tdd`: vertical-slice, behavior through public interface, watch each test fail before writing impl, assertion correctness check.
+**Inside both paths**, every code-writing task goes through `evanflow-tdd` — it's the discipline running inside the execute harness, not a phase that comes after. Per-cycle: RED → GREEN → REFACTOR (refactor with the fresh test as safety net, not deferred to the end). Behavior through public interface, watch each test fail before writing impl, assertion correctness check.
 
 ### Phase 4 — Iterate (always, on success)
 

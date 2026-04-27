@@ -49,17 +49,21 @@ Every `evanflow-*` skill speaks this. Cross-reference here, don't redefine.
 2. (if non-trivial) evanflow-writing-plans — file structure, bite-sized tasks, embedded grill.
                                           Step 2.5: parallelization check — offers
                                           coder-overseer if 3+ independent units exist.
-3.             evanflow-executing-plans  — Step 0: parallelization check (offers coder-overseer).
-                                          Otherwise task-by-task sequential with inline verification.
-        OR     evanflow-coder-overseer   — if user picked parallel path: contract → RED checkpoint →
-                                          coders (vertical-slice TDD) → per-coder overseers →
-                                          integration overseer (runs touchpoint tests).
-4. (always)    evanflow-tdd              — vertical slices for any production code.
-                                          Used INSIDE executing-plans tasks AND inside coder-overseer
-                                          coders.
-5.             evanflow-iterate          — self-review loop: re-read diff, fix issues, re-run checks,
+3. EXECUTE     evanflow-executing-plans  — task harness: critical review, TaskCreate, inline
+                                          verification, blockers, quality checks. Step 0:
+                                          parallelization check (offers coder-overseer).
+        OR     evanflow-coder-overseer   — same harness role, parallel: contract → RED checkpoint →
+                                          coders → per-coder overseers → integration overseer.
+
+   ↳ INSIDE every code-writing task in EXECUTE:
+       evanflow-tdd                      — vertical-slice RED → GREEN → REFACTOR per cycle.
+                                          NOT a separate phase. The discipline that runs
+                                          inside the task harness for any production code.
+
+4.             evanflow-iterate          — self-review loop AFTER all tasks are done:
+                                          re-read diff, fix issues, re-run checks,
                                           (UI) view the page. Repeat until clean.
-6.             STOP. Report what was done. Await user direction.
+5.             STOP. Report what was done. Await user direction.
 ```
 
 **The loop is interlinked end-to-end.** Each step actively offers the right next-step skill when conditions match — including offering `evanflow-coder-overseer` at both planning time (step 2) and execution time (step 3) when the plan is parallelizable.

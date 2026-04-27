@@ -5,8 +5,11 @@
 16 cohesive skills + 2 custom subagents walk an idea from brainstorm through implementation, with checkpoints throughout where you stay in control. One entry point: say *"let's evanflow this"* and the orchestrator runs the loop.
 
 ```
-brainstorm → plan → execute (sequential or parallel) → tdd → iterate → STOP
+brainstorm → plan → execute (vertical-slice TDD per task) → iterate → STOP
+                    └─ sequential, or parallel coder/overseer
 ```
+
+TDD is not a separate phase after execute — it's the discipline *inside* each code-writing task. Execute is the harness (task tracking, blockers, quality checks); `evanflow-tdd` is what runs inside any task that produces production code.
 
 The loop is **conductor, not autopilot**: real checkpoints at design approval, plan approval, and after iteration. The agent stops short of every git operation and waits for your direction. No auto-commits. No forced ceremony. No "must invoke a skill" tax.
 
@@ -37,8 +40,8 @@ The loop is built around **discipline that compounds across iterations**, not si
 
 - **Brainstorm** clarifies intent, proposes 2–3 approaches with embedded grill (stress-test) → you approve the design
 - **Plan** maps file structure first (deep modules, deletion test) → you approve the plan
-- **Execute** runs task-by-task with inline verification → blockers stop the loop and surface to you
-- **TDD** is vertical-slice only: one failing test → minimal impl → repeat. Tests verify behavior through public interfaces, so they survive refactors
+- **Execute** runs task-by-task with inline verification → blockers stop the loop and surface to you. Inside each code-writing task, **TDD** is the discipline (not a separate phase that comes after).
+- **TDD** is vertical-slice only and **per-cycle full RED → GREEN → REFACTOR**: one failing test → minimal impl → refactor *while the test you just wrote is still fresh as your safety net* → next test. Refactor is not deferred to the end. Tests verify behavior through public interfaces, so they survive refactors
 - **Iterate** re-reads the diff with fresh eyes, runs quality checks, screenshots UI changes, and runs against a Five Failure Modes checklist (hallucinated actions, scope creep, cascading errors, context loss, tool misuse). Hard cap of 5 iterations
 - **STOP.** Report. Await your direction. The agent never auto-commits, never auto-stages, never proposes a PR
 
@@ -46,13 +49,14 @@ For plans with 3+ truly independent units, the loop forks into a **parallel code
 
 ## Hard Rules Baked Into the Loop
 
-Several rules come from **2025-2026 industry research on agentic coding failure modes** and are baked into every skill:
+Each rule below cites the source it came from. If a citation is missing, the rule is opinion from running the loop on real projects, not research — labeled as such.
 
-- **Never invent values** — file paths, env vars, IDs, function names, library APIs. If unsure, the agent stops and asks. (Action-hallucination is the most dangerous agent failure.)
-- **Assertion-correctness warning** — research shows 62% of LLM-generated test assertions are wrong. Both `evanflow-tdd` and the overseer review explicitly check whether a one-character bug in the implementation would still let the assertion pass.
-- **Watch for context drift** — `evanflow-compact` triggers when symptoms appear (re-asking established questions, contradicting earlier decisions). Industry data: ~65% of enterprise AI coding failures trace to context drift, not raw token exhaustion.
-- **Five Failure Modes pass** in iterate + overseer review — explicit check against hallucinated actions, scope creep, cascading errors, context loss, tool misuse.
-- **No skill tax** — ad-hoc questions don't require a skill invocation. Skills are tools, not a tollbooth.
+- **Never invent values** — file paths, env vars, IDs, function names, library APIs. If unsure, the agent stops and asks. *Source: action-hallucination is the top failure mode in [DAPLab/Columbia "9 Critical Failure Patterns of Coding Agents"](https://daplab.cs.columbia.edu/general/2026/01/08/9-critical-failure-patterns-of-coding-agents.html).*
+- **Assertion-correctness warning** — over 62% of LLM-generated test assertions were incorrect across HumanEval evaluation of four LLMs. *Source: ["Test-Driven Development for Code Generation" (arXiv 2402.13521)](https://arxiv.org/pdf/2402.13521), §3.2.* Both `evanflow-tdd` and the overseer review explicitly check whether a one-character bug in the implementation would still let the assertion pass.
+- **Five Failure Modes pass** in iterate + overseer review — hallucinated actions, scope creep, cascading errors, context loss, tool misuse. *Source: synthesized from the DAPLab failure patterns paper above.*
+- **Context drift watch** — `evanflow-compact` triggers at clean phase boundaries and on drift symptoms (re-asking settled questions, contradicting earlier decisions). *Source: nearly 65% of enterprise AI failures in 2025 were attributed to context drift or memory loss during multi-step reasoning, not raw context exhaustion — see [Alex Merced, "Context Management Strategies for OpenCode" (March 2026)](https://datalakehousehub.com/blog/2026-03-context-management-opencode/).*
+- **Never auto-commit, never auto-stage** — opinion, not research. Came from running the loop on real projects: every time the agent decided to integrate, it integrated wrong.
+- **No skill tax** — opinion. Skills are tools, not a tollbooth.
 
 ---
 
