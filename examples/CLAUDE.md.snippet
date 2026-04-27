@@ -1,0 +1,36 @@
+<!--
+Paste this snippet into your project's CLAUDE.md to brief Claude about EvanFlow.
+Adapt the placeholders (in <angle brackets>) to your actual project commands.
+This snippet is only needed for the "manual copy" install path.
+If you installed via `/plugin marketplace add` or `npx skills add`, the skills
+self-document via their frontmatter and the snippet is optional.
+-->
+
+## Skill Discipline (EvanFlow)
+
+This project uses **EvanFlow**, a custom skill set. The meta skill `evanflow` describes the shared vocabulary (deep modules, deletion test, vertical slice, grill, mockup quick-mode) and when to invoke each skill.
+
+**Single entry point: `evanflow-go`.** When the user says "let's evanflow this", "use evanflow", "evanflow this idea", or anything similar — invoke `evanflow-go`. It walks the whole loop (brainstorm → plan → execute → tdd → iterate → STOP), announces each step, respects checkpoints, and stops where the user retains control.
+
+**Default loop:**
+1. (optional) `evanflow-brainstorming` — clarify intent, propose 2-3 approaches, embedded grill. Mockup-only requests use mockup quick-mode.
+2. (if non-trivial) `evanflow-writing-plans` — file structure first, bite-sized tasks. Step 2.5 offers `evanflow-coder-overseer` if 3+ independent units exist.
+3. `evanflow-executing-plans` — task-by-task with inline verification. Step 0 re-offers parallel path.
+4. `evanflow-tdd` — vertical slices for any production code.
+5. `evanflow-iterate` — self-review loop. Five Failure Modes pass. Hard cap: 5 iterations.
+6. **STOP. Report what was done. Await user direction.**
+
+**Special-purpose:** `evanflow-glossary`, `evanflow-improve-architecture`, `evanflow-design-interface`, `evanflow-debug`, `evanflow-review`, `evanflow-prd`, `evanflow-qa`, `evanflow-coder-overseer`, `evanflow-compact`.
+
+**Hard rules:**
+- **Never auto-commit, never auto-stage, never auto-finish.** Every git write op requires explicit user confirmation in the current turn.
+- **Never invent values.** File paths, env vars, IDs, function names, library APIs — if unsure, STOP and ask.
+- **No "must invoke a skill" tax.** Ad-hoc questions get direct answers.
+
+### Project Quality Checks
+
+The skills reference "the project's quality checks" abstractly. Document the exact commands here so the agent knows what to run:
+
+- **Typecheck:** `<your typecheck command, e.g., tsc --noEmit, pnpm typecheck>`
+- **Lint:** `<your lint command, e.g., pnpm lint, eslint .>`
+- **Test:** `<your test command, e.g., pnpm test, pytest, cargo test>`

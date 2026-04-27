@@ -1,0 +1,36 @@
+{
+  "name": "evanflow",
+  "owner": {
+    "name": "Evan Klem"
+  },
+  "metadata": {
+    "description": "EvanFlow — a TDD-driven iterative feedback loop for software development with Claude Code. Vertical-slice TDD, parallel coder/overseer review, executable cohesion contracts, context compaction, no auto-commits.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "evanflow",
+      "description": "16 evanflow-* skills (default loop + special-purpose) + 2 custom subagents (evanflow-coder, evanflow-overseer) + git-guardrails PreToolUse hook. Single entry point: say 'let's evanflow this' to walk the whole loop end-to-end.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/evanflow",
+        "./skills/evanflow-go",
+        "./skills/evanflow-brainstorming",
+        "./skills/evanflow-writing-plans",
+        "./skills/evanflow-executing-plans",
+        "./skills/evanflow-tdd",
+        "./skills/evanflow-iterate",
+        "./skills/evanflow-coder-overseer",
+        "./skills/evanflow-compact",
+        "./skills/evanflow-glossary",
+        "./skills/evanflow-improve-architecture",
+        "./skills/evanflow-design-interface",
+        "./skills/evanflow-debug",
+        "./skills/evanflow-review",
+        "./skills/evanflow-prd",
+        "./skills/evanflow-qa"
+      ]
+    }
+  ]
+}

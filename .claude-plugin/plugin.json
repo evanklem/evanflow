@@ -1,0 +1,20 @@
+{
+  "name": "evanflow",
+  "description": "A TDD-driven iterative feedback loop for software development with Claude Code. 16 cohesive skills + 2 custom subagents walk an idea from brainstorm → plan → execute → tdd → iterate, with checkpoints throughout. Vertical-slice TDD, parallel coder/overseer review, no auto-commits. Single entry point: 'let's evanflow this'.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Evan Klem"
+  },
+  "homepage": "https://github.com/evanklem/evanflow",
+  "repository": "https://github.com/evanklem/evanflow",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "claude-code-skills",
+    "tdd",
+    "test-driven-development",
+    "agentic-coding",
+    "feedback-loop",
+    "developer-tools"
+  ]
+}
