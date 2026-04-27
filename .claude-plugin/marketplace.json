@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "evanflow",
-      "description": "16 evanflow-* skills (default loop + special-purpose) + 2 custom subagents (evanflow-coder, evanflow-overseer) + git-guardrails PreToolUse hook. Single entry point: say 'let's evanflow this' to walk the whole loop end-to-end.",
+      "description": "16 skills (default loop + special-purpose + meta) + 2 custom subagents (evanflow-coder, evanflow-overseer) + git-guardrails PreToolUse hook. Single entry point: say 'let's evanflow this' to walk the whole loop end-to-end.",
       "source": "./",
       "strict": false,
       "skills": [
