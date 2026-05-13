@@ -72,11 +72,12 @@ Each rule below cites the source it came from. If a citation is missing, the rul
 | `evanflow-tdd` | Vertical-slice TDD. One test → one impl → repeat. Behavior through public interface. Assertion-correctness warning. |
 | `evanflow-iterate` | Self-review loop after implementation. Re-read diff, fix issues, run quality checks, screenshot UI (via headless Chromium). Five Failure Modes checklist. Hard cap of 5 iterations. |
 
-### Special-Purpose (8 skills)
+### Special-Purpose (9 skills)
 
 | Skill | Purpose |
 |---|---|
 | `evanflow-go` | **Single entry point.** Say "let's evanflow this" and it walks the whole loop. |
+| `evanflow-coder-overseer` | Parallel implementation: coder/overseer pairs + integration overseer + executable cohesion contract. For plans with 3+ independent tasks. |
 | `evanflow-glossary` | Extract canonical domain terms into `CONTEXT.md`. Flag ambiguities and synonyms. |
 | `evanflow-improve-architecture` | Surface refactor opportunities via the deletion test + deep-modules vocabulary. |
 | `evanflow-design-interface` | "Design it twice" — spawn 3+ parallel sub-agents with radically different constraints, compare on depth/simplicity/efficiency. |
